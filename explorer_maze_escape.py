@@ -4,6 +4,7 @@
 
 def maze_escape(maze):
     goal_pos = find_goal_pos(maze, [])
+    shortest_route(maze, goal_pos, [])
 
 def find_goal_pos(maze, goal_pos):
     for path in range(len(maze)):
@@ -13,7 +14,17 @@ def find_goal_pos(maze, goal_pos):
 
     return goal_pos
 
+def shortest_route(maze, goal_pos, steps):
+    while goal_pos[1] >= 0:
+        while goal_pos[0] >= 0:
+            i, j = goal_pos[0], goal_pos[1]
+            steps.append([i, j])
+            if maze[j - 1][i] == 0 and j - 1 >= 0: break
 
+            goal_pos[0] -= 1
+        goal_pos[1] -= 1
+        
+    print(steps[::-1])
 
 maze_escape(
   [
